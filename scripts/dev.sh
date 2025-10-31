@@ -14,8 +14,8 @@
 #   - build the 'pacman' docker image at least once (using `build.sh` in the same folder, invoke it from the parent folder, see README.md for instructions)
 #
 # User defined variables:
-MONGO_AUTH_PWD='mongoadmin'
-MONGO_AUTH_USER='secret'
+MONGO_AUTH_USER='mongoadmin'
+MONGO_AUTH_PWD='secret'
 
 #
 # DO NOT EDIT ANYTHING PAST THIS LINE UNLESS YOU KNOW WHAT YOU'RE DOING
@@ -31,9 +31,9 @@ set -o nounset
 LOCAL_WORKDIR=$(pwd)
 DOCKER_NETWORK_NAME='pacman-dev'
 MONGO_CONTAINER_NAME='mongo'
-MONGO_CONTAINER_IMAGE='registry-1.docker.io/bitnami/mongodb:7.0.5-debian-11-r22'
-MONGO_BITNAMI_SCRIPTS='/bitnami/scripts'
-MONGO_WORKDIR='/bitnami/mongodb'
+MONGO_CONTAINER_IMAGE='docker.io/library/mongo:7.0.7-jammy'
+MONGO_SCRIPTS='/scripts'
+MONGO_WORKDIR='/data/db'
 PACMAN_CONTAINER_NAME='pacman'
 PACMAN_CONTAINER_IMAGE='pacman'
 PACMAN_WORKDIR='/usr/src/app'
@@ -56,18 +56,9 @@ docker network create --driver bridge ${DOCKER_NETWORK_NAME}
 TMP_DOCKER_VOL=$(docker volume create)
 docker run --rm -d --name ${MONGO_CONTAINER_NAME} \
     --network ${DOCKER_NETWORK_NAME} \
-    -e MONGODB_ROOT_USER=${MONGO_AUTH_USER} \
-    -e MONGODB_ROOT_PASSWORD=${MONGO_AUTH_PWD} \
-    -e BITNAMI_DEBUG="false" \
-    -e ALLOW_EMPTY_PASSWORD="no" \
-    -e MONGODB_SYSTEM_LOG_VERBOSITY="0" \
-    -e MONGODB_DISABLE_SYSTEM_LOG="no" \
-    -e MONGODB_DISABLE_JAVASCRIPT="no" \
-    -e MONGODB_ENABLE_JOURNAL="yes" \
-    -e MONGODB_PORT_NUMBER="27017" \
-    -e MONGODB_ENABLE_IPV6="no" \
-    -e MONGODB_ENABLE_DIRECTORY_PER_DB="no" \
-    -v ${LOCAL_WORKDIR}/scripts/mongo:${MONGO_BITNAMI_SCRIPTS}:ro \
+    -e MONGO_INITDB_ROOT_USERNAME=${MONGO_AUTH_USER} \
+    -e MONGO_INITDB_ROOT_PASSWORD=${MONGO_AUTH_PWD} \
+    -v ${LOCAL_WORKDIR}/scripts/mongo:${MONGO_SCRIPTS}:ro \
     -v ${TMP_DOCKER_VOL}:${MONGO_WORKDIR} \
     ${MONGO_CONTAINER_IMAGE}
 

@@ -34,7 +34,7 @@ npm run dev
 ```
 
 You should see your Node.js server logs, keep the server running.
-Open a new browser windows, navigate to `http://localhost:8000/`, you should see the Pac-Man game.
+Open a new browser windows, navigate to `http://localhost:8080/`, you should see the Pac-Man game.
 
 ## Create Application Artifacts
 
