@@ -5,7 +5,7 @@ pacman:
   replicaCount: 1
   image:
     registry: ghcr.io
-    repository: shuguet
+    repository: michaelhaigh
     image: pacman
     tag: latest
     pullPolicy: Always

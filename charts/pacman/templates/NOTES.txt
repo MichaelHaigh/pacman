@@ -1,4 +1,4 @@
-1. Helm has finished deploying the Pac-Man artifacts - you can find out more here > https://github.com/shuguet/pacman
+1. Helm has finished deploying the Pac-Man artifacts - you can find out more here > https://github.com/michaelhaigh/pacman
 
 2. Get the application URL by running these commands:
 

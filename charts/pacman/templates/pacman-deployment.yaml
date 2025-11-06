@@ -30,7 +30,7 @@ spec:
           volumeMounts:
            - mountPath: /.npm
              name: npm-cache-volume
-          # image: "ghcr.io/shuguet/pacman:master"
+          # image: "ghcr.io/michaelhaigh/pacman:master"
           image: {{ default .Chart.AppVersion .Values.pacman.image.tag | print .Values.pacman.image.registry "/" .Values.pacman.image.repository "/" .Values.pacman.image.image ":"  }}
           imagePullPolicy: {{ .Values.pacman.image.pullPolicy }}
           ports:
