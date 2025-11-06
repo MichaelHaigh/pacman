@@ -39,6 +39,23 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- define "pacman.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "pacman.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+app.kubernetes.io/component: frontend
+{{- end }}
+
+{{- define "mongodb.labels" -}}
+helm.sh/chart: {{ include "pacman.chart" . }}
+{{ include "mongodb.selectorLabels" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
+
+{* Selector labels *}
+{{- define "mongodb.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "pacman.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+app.kubernetes.io/component: database
 {{- end }}
 
 {* Return ingress class name annotation *}

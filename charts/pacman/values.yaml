@@ -11,7 +11,11 @@ pacman:
     pullPolicy: Always
 
 mongodb:
-  enabled: true
+  replicaCount: 1
+  image:
+    image: mongo
+    tag: 7.0.7-jammy
+    pullPolicy: Always
 
 ## Service configuration.
 service:

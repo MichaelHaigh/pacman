@@ -1,3 +1,6 @@
 node_modules
 # VSCode stuff
 .devcontainer
+
+# VIM Swap files
+*.swp

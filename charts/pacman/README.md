@@ -2,7 +2,7 @@
 
 ## Add repository
 ```
-helm repo add pacman https://shuguet.github.io/pacman/
+helm repo add pacman https://michaelhaigh.github.io/pacman/
 ```
 
 ## Install

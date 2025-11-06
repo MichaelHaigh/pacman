@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "pacman.fullname" . }}-mongodb
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "mongodb.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.mongodb.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "mongodb.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "mongodb.selectorLabels" . | nindent 8 }}
+        name: mongodb
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-mongodb
+          image: {{ .Values.mongodb.image.image }}:{{ .Values.mongodb.image.tag}}
+          imagePullPolicy: {{ .Values.mongodb.image.pullPolicy }}
+          ports:
+            - containerPort: 27017
+          readinessProbe:
+            exec:
+              command:
+              - /bin/sh
+              - -c
+              - mongosh --eval "db.hello().isWritablePrimary || db.hello().secondary"
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 2
+          livenessProbe:
+            exec:
+              command:
+              - /bin/sh
+              - -c
+              - mongosh --eval "db.adminCommand('ping').ok"
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+          startupProbe:
+            tcpSocket:
+              port: 27017
+            initialDelaySeconds: 20
+            periodSeconds: 15
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 5
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: root
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: mongodb-root-password
+                  name: {{ .Release.Name }}-mongodb
+          volumeMounts:
+            - name: {{ .Chart.Name }}-mongodb-pvc
+              mountPath: /data/db
+  volumeClaimTemplates:
+    - metadata:
+        name: {{ .Chart.Name }}-mongodb-pvc
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 10Gi

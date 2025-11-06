@@ -1,12 +1,12 @@
 apiVersion: v2
-version: 0.1.20
-appVersion: "0.1.20"
+version: 0.1.21
+appVersion: "0.1.21"
 name: pacman
 description: Pac-Man Demo App for Kubernetes
-home: https://github.com/shuguet/pacman
-icon: https://shuguet.github.io/pacman/icon.png
+home: https://github.com/MichaelHaigh/pacman
+icon: https://MichaelHaigh.github.io/pacman/icon.png
 sources:
-  - https://github.com/shuguet/pacman
+  - https://github.com/MichaelHaigh/pacman
 maintainers:
   - name: Dean Lewis
     url: https://veducate.co.uk
@@ -18,9 +18,5 @@ maintainers:
     url: https://www.huguet.me
   - name: Michael Courcy
     url: https://github.com/michaelcourcy
-
-dependencies:
-- name: mongodb
-  version: 15.1.0
-  repository: https://charts.bitnami.com/bitnami
-  condition: mongodb.enabled
+  - name: Michael Haigh
+    url: https://github.com/MichaelHaigh
