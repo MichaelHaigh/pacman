@@ -2,6 +2,32 @@ apiVersion: v1
 entries:
   pacman:
   - apiVersion: v2
+    appVersion: 0.1.24
+    created: "2026-01-02T17:05:01.495540725Z"
+    description: Pac-Man Demo App for Kubernetes
+    digest: c7e5bdf1ae9044b9c1c4d3e8a50d3512d658c9fd6fb02053fc3b02ec5448d7b2
+    home: https://github.com/MichaelHaigh/pacman
+    icon: https://MichaelHaigh.github.io/pacman/icon.png
+    maintainers:
+    - name: Dean Lewis
+      url: https://veducate.co.uk
+    - name: Davis Phillips
+      url: https://github.com/dav1x/
+    - name: Michael Cade
+      url: https://vzilla.co.uk/
+    - name: Sylvain Huguet
+      url: https://www.huguet.me
+    - name: Michael Courcy
+      url: https://github.com/michaelcourcy
+    - name: Michael Haigh
+      url: https://github.com/MichaelHaigh
+    name: pacman
+    sources:
+    - https://github.com/MichaelHaigh/pacman
+    urls:
+    - https://github.com/MichaelHaigh/pacman/releases/download/pacman-0.1.24/pacman-0.1.24.tgz
+    version: 0.1.24
+  - apiVersion: v2
     appVersion: 0.1.23
     created: "2025-11-06T20:23:08.928808871Z"
     description: Pac-Man Demo App for Kubernetes
@@ -79,4 +105,4 @@ entries:
     urls:
     - https://github.com/MichaelHaigh/pacman/releases/download/pacman-0.1.21/pacman-0.1.21.tgz
     version: 0.1.21
-generated: "2025-11-06T20:23:08.928822807Z"
+generated: "2026-01-02T17:05:01.49555945Z"
