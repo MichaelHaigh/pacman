@@ -3,7 +3,7 @@
 # @Author: shuguet <sylvain@huguet.me>
 # @Date: 2022-03-10 13:51:11 
 # @Last Modified by:   MichaelHaigh <m.haigh@veeam.com>
-# @Last Modified time: 2025-11-06 20:07
+# @Last Modified time: 2026-01-02 16:34
 #
 # Description: 
 # Helper script to develop/mainitain the Pacman app (Node.js version with MongoDB backend)
@@ -31,7 +31,7 @@ set -o nounset
 LOCAL_WORKDIR=$(pwd)
 DOCKER_NETWORK_NAME='pacman-dev'
 MONGO_CONTAINER_NAME='mongo'
-MONGO_CONTAINER_IMAGE='docker.io/library/mongo:7.0.7-jammy'
+MONGO_CONTAINER_IMAGE='docker.io/library/mongo:7.0.28-jammy'
 MONGO_SCRIPTS='/scripts'
 MONGO_WORKDIR='/data/db'
 PACMAN_CONTAINER_NAME='pacman'

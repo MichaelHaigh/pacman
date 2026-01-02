@@ -14,7 +14,7 @@ mongodb:
   replicaCount: 1
   image:
     image: mongo
-    tag: 7.0.7-jammy
+    tag: 7.0.28-jammy
     pullPolicy: Always
 
 ## Service configuration.
