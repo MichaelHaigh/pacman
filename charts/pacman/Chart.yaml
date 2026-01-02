@@ -1,6 +1,6 @@
 apiVersion: v2
-version: 0.1.23
-appVersion: "0.1.23"
+version: 0.1.24
+appVersion: "0.1.24"
 name: pacman
 description: Pac-Man Demo App for Kubernetes
 home: https://github.com/MichaelHaigh/pacman
