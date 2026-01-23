@@ -13,6 +13,7 @@ pacman:
 mongodb:
   replicaCount: 1
   image:
+    registry: docker.io
     image: mongo
     tag: 7.0.28-jammy
     pullPolicy: Always
