@@ -1,6 +1,6 @@
-FROM node:current-alpine
+FROM node:22-alpine
 
-LABEL org.opencontainers.image.authors="sylvain@huguet.me"
+LABEL org.opencontainers.image.authors="m.haigh@veeam.com"
 
 # Create app directory
 RUN mkdir -p /usr/src/app
