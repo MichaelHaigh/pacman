@@ -111,6 +111,8 @@ function geronimo() {
            success: function(data) {
                 console.log('Highscore added: ' + data);
                 $('#highscore-form').html('<span class="button" id="show-highscore">View Highscore List</span>');
+                game.showContent('highscore-content');
+                getHighscore();
             },
             error: function(errorThrown) {
                 console.log(errorThrown);
@@ -1479,8 +1481,6 @@ function checkAppCache() {
             } else {
                 $('#form-validater').html("");
                 addHighscore();
-                game.showContent('highscore-content');
-                getHighscore();
             }
         });
 

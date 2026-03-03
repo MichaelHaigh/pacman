@@ -30,6 +30,13 @@ router.get('/metadata', function (req, res, next) {
 
 function getCloudMetadata(callback) {
   console.log('getCloudMetadata');
+  // Allow explicit overrides for environments where auto-detection doesn't work
+  // (e.g. local development or self-managed clusters where IMDS is unreachable)
+  if (process.env.MY_CLOUD && process.env.MY_ZONE) {
+    console.log(`Using env overrides: CLOUD=${process.env.MY_CLOUD}, ZONE=${process.env.MY_ZONE}`);
+    callback(process.env.MY_CLOUD, process.env.MY_ZONE);
+    return;
+  }
   // Query k8s node api
   getK8sCloudMetadata(function (err, c, z) {
     if (err) {
@@ -401,8 +408,12 @@ function getK8sCloudMetadata(callback) {
       }
 
       // use the annotation to identify the zone if available
-      if (metaData.metadata.labels['failure-domain.beta.kubernetes.io/zone']) {
-        zone = metaData.metadata.labels['failure-domain.beta.kubernetes.io/zone'].toLowerCase();
+      // check both the current label and the deprecated one (used in older K8s / OpenShift 3.x)
+      const labels = metaData.metadata.labels;
+      if (labels['topology.kubernetes.io/zone']) {
+        zone = labels['topology.kubernetes.io/zone'].toLowerCase();
+      } else if (labels['failure-domain.beta.kubernetes.io/zone']) {
+        zone = labels['failure-domain.beta.kubernetes.io/zone'].toLowerCase();
       }
 
       // return CLOUD and ZONE data
