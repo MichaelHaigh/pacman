@@ -10,6 +10,7 @@ spec:
   selector:
     matchLabels:
       {{- include "mongodb.selectorLabels" . | nindent 6 }}
+  serviceName: {{ include "pacman.fullname" . }}-mongodb
   template:
     metadata:
       {{- with .Values.podAnnotations }}
