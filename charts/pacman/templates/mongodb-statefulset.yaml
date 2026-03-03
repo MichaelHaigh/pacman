@@ -64,7 +64,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: mongodb-root-password
-                  name: {{ .Release.Name }}-mongodb
+                  name: {{ include "pacman.fullname" . }}-mongodb
           volumeMounts:
             - name: {{ .Chart.Name }}-mongodb-pvc
               mountPath: /data/db
